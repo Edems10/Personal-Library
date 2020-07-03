@@ -32,35 +32,43 @@ int main(int argc, char* argv[])
 {
 	FILE* f;
 	char path[256];
-	
+
 	if (argc < 2)
 	{
 		printf("Path of File Not included You need to select your file\n");
-		char path[256] = "C:\\TestFolder\\PersonalLibrary\\PersonalLibrary.txt";
-		f = fopen(path, "a+");
+		while (choose_file(path) != 1) { printf("Something went wrong try again.\n"); }
+		while ((f = fopen(path, "a+")) == NULL)
+		{
+			while (choose_file(path) != 1)
+			{
+				printf("Something went wrong try again.\n");
+			}
+		}
 		printf("File loaded from: %s\n", path);
-		
 	}
 	else
 	{
-		 char* path = argv[1];
-		 f = fopen(path, "a+");
-		 printf("File loaded from: %s\n", path);
+		char* path = argv[1];
+		while ((f = fopen(path, "a+")) == NULL)
+		{
+			while (choose_file(path) != 1)
+			{
+				printf("Something went wrong try again.\n");
+			}
+		}
+		printf("File loaded from: %s\n", path);
 	}
+
 	print_menu();
-	//ChooseProgram(path); // ok for some reason it returns the shit in path and every fucking second char is 0 ???????
 
-
-	// TODO also add loop to test if the path is corrcet
-	
 	while (1)
 	{
-
 		int c = getchar();
-		while (c == 10)		// to get rid off the /n that printf leave
+		while (c == 10)		// to get rid off the /n that printf leaves
 		{
 			c = getchar();
 		}
+
 		switch (c)
 		{
 		case 'a':
@@ -80,15 +88,20 @@ int main(int argc, char* argv[])
 			printf("\n: ");
 			break;
 		case 'e':
-			store_to_file(f);
+			char target_file[256];
+			while (choose_file(target_file) != 1)				//get path to save files to
+			{
+				printf("Something went wrong try again.\n");
+			}
+			store_to_file(f, target_file);
 			printf("\n: ");
 			break;
 		case 'f':
-			printf("Enter path of File\n:");
-			clean_stdin();
-			char string[256];
-			gets_s(string);
-			f = fopen(string, "a+");
+			while (choose_file(path) != 1)						//get new path to load from
+			{
+				printf("Something went wrong try again.\n");
+			}
+			f = fopen(path, "a+");
 			printf("\n: ");
 			break;
 		case 'm':

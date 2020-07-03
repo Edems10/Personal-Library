@@ -83,11 +83,23 @@ void print_all_books(FILE* f);
 /**
   * Parameters:
   * FILE: cointaining file to write to
+  * char*: array that contains the path to file that will be copied to or created
   * Return Value:
+  *	0 - Fail
+  * 1 - Succes
+  * Description:
+  * This function saves the loaded file to the new file
+  */
+int store_to_file(FILE* f,char *target_file);
+/**
+  * Parameters:
+  * char*: array[256] preferably epmty path of file will be stored here
+  * Return Value: 
+  *	0 - User failed to select File
+  * 1 - File selected Correctly
   * Nothing -- Note: Modifies the file.
   * Description:
-  * This function saves the loaded file to the new enterd file by the user
+  * This function prints all books from file in readable format
+  * -- Note: the format is static
   */
-void store_to_file(FILE* f);
-
-int ChooseProgram(char* path);
+int choose_file(char* p);
