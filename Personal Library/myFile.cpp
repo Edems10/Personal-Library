@@ -21,10 +21,8 @@ void enter_to_file_year(FILE* f)
 	struct tm* local = localtime(&now);					//get the structure for local time
 
 	do {												//checks if the string contains number and saves it
-
 		fgets(string, 256, stdin);
 		x = atoi(string);
-
 	} while (x < -3100 && x < (local->tm_year + 1900));  //(3100 BC)and check for current year 1900 + because that's the date it started counting from 
 	fputs(string, f);
 }
@@ -153,7 +151,7 @@ void delete_book(FILE* f, char path[])
 	char string[256]{ NULL };
 	int lengthOfUserString = 0;
 	FILE* temp_file;
-	temp_file = fopen("replica.c", "w");						//creating temporary file
+	temp_file = fopen("replica.c", "w");					//creating temporary file
 
 	printf("Enter Title of the book : ");					
 	clean_stdin();		

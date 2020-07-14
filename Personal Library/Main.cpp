@@ -21,11 +21,10 @@
  *
  * Summary of Program:
  *
- *   These files contains code which should recreate simple UI in console for user.
- *	 The user interacts with te menu or can store the book in files and read them through the console
- *	 The menu include functions to input,delete,print,find books
- *	 Functioanality also include loading other files and storing them.
- *
+ * These files contains code which should recreate simple UI in console for user.
+ * The user interacts with te menu or can store the book in files and read them through the console
+ * The menu include functions to input,delete,print,find books
+ * Functioanality also include loading other files and storing them.
  */
 
 int main(int argc, char* argv[])
@@ -36,7 +35,10 @@ int main(int argc, char* argv[])
 	if (argc < 2)
 	{
 		printf("Path of File Not included You need to select your file\n");
-		while (choose_file(path) != 1) { printf("Something went wrong try again.\n"); }
+		while (choose_file(path) != 1) 
+		{ 
+			printf("Something went wrong try again.\n"); 
+		}
 		while ((f = fopen(path, "a+")) == NULL)
 		{
 			while (choose_file(path) != 1)
