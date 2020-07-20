@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 				printf("Something went wrong try again.\n");
 			}
 		}
-		printf("File loaded from: %s\n", path);
+		
 	}
 	else
 	{
@@ -58,15 +58,15 @@ int main(int argc, char* argv[])
 				printf("Something went wrong try again.\n");
 			}
 		}
-		printf("File loaded from: %s\n", path);
+		
 	}
-
+	printf("File loaded from: %s\n", path);
 	print_menu();
 
 	while (1)
 	{
 		int c = getchar();
-		while (c == 10)		// to get rid off the /n that printf leaves
+		while (c == 10)		// to get rid off the /n
 		{
 			c = getchar();
 		}

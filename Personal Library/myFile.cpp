@@ -20,10 +20,11 @@ void enter_to_file_year(FILE* f)
 	time(&now);
 	struct tm* local = localtime(&now);					//get the structure for local time
 
-	do {												//checks if the string contains number and saves it
+	do
+	{												//checks if the string contains number and saves it
 		fgets(string, 256, stdin);
 		x = atoi(string);
-	} while (x < -3100 && x < (local->tm_year + 1900));  //(3100 BC)and check for current year 1900 + because that's the date it started counting from 
+	} while ((x < -3100) || (x > (local->tm_year + 1900)));  //(3100 BC)and check for current year 1900 + because that's the date it started counting from 
 	fputs(string, f);
 }
 void enter_to_file_stars(FILE* f)
@@ -34,7 +35,6 @@ void enter_to_file_stars(FILE* f)
 	do {												//checks if the string contains number and saves it
 		fgets(string, 256, stdin);
 		x = atoi(string);
-
 	} while (x > 5 || x < 1);							//the number has to be between 1-5
 	for (int j = 0; j < x; j++)
 	{
@@ -81,7 +81,7 @@ void search_for_book(FILE* f)
 
 	while (fgets(line, sizeof line, f) != NULL)
 	{
-		if (count % 5 == 0 && count != 0)					//if all 5 were search 
+		if (count % 5 == 0 && count != 0)					//if all 5 were searched
 		{
 			if (myBool == 1)								//if book with same name/author... found
 			{
@@ -153,8 +153,8 @@ void delete_book(FILE* f, char path[])
 	FILE* temp_file;
 	temp_file = fopen("replica.c", "w");					//creating temporary file
 
-	printf("Enter Title of the book : ");					
-	clean_stdin();		
+	printf("Enter Title of the book : ");
+	clean_stdin();
 	gets_s(string);											//title of book to delete
 
 
@@ -178,8 +178,8 @@ void delete_book(FILE* f, char path[])
 				}
 			}
 
-			if (counter == lengthOfUserString)				
-			{	
+			if (counter == lengthOfUserString)
+			{
 				deleteFound = 1;							//if yes we found our match
 			}
 		}
@@ -202,15 +202,15 @@ void delete_book(FILE* f, char path[])
 	}
 	fclose(f);
 	fclose(temp_file);
-	remove(path);											//elete the original file
+	remove(path);											//delete the original file
 	rename("replica.c", path);								//change the temporary file to the original name
 	f = fopen(path, "a+");
-	
+
 	if (amountOfDeletedFiles < 1)
 	{
-		printf("No Title with this name:{%s} was found\n",string);
+		printf("No Title with this name:{%s} was found\n", string);
 	}
-	else if(amountOfDeletedFiles==1) {
+	else if (amountOfDeletedFiles == 1) {
 		printf("Title:{%s} was sucesfully deleted\n", string);
 	}
 	else
@@ -262,7 +262,7 @@ void print_all_books(FILE* f)
 				else
 				{
 					book[lineCounter++] = '\t';
-				}					
+				}
 				break;									// no need to continue after finding \n it's the sign that te line is over
 			}
 			book[lineCounter++] = line[i];				//adding the char untill we find end of line that is marked by \n
@@ -279,7 +279,7 @@ int store_to_file(FILE* f, char* target_file)
 	char ch;
 	FILE* target;
 
-	if ((target = fopen(target_file, "w"))==NULL)					//if the path is incorrect or some other issue return 0 with error
+	if ((target = fopen(target_file, "w")) == NULL)					//if the path is incorrect or some other issue return 0 with error
 	{
 		perror("There was an issue try selecting another file");
 		return 0;

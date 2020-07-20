@@ -71,10 +71,9 @@ void print_all_books(FILE* f);
  */
 int store_to_file(FILE* f, char* target_file);
 /**
- * This function prints all books from file in readable format
- * char*: array[256] preferably epmty path of file will be stored here
+ * This function prompts user to select file from windows explorer
+ * @param *p: array[256] path of file will be stored here
  * @return  0 - User failed to select File
  *			1 - File selected Correctly
- * @note: the format is static
  */
 int choose_file(char* p);
